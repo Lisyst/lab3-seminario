@@ -22,7 +22,7 @@ import { convert, getCurrency } from './currency.js';
  * formatPrice(100, 'USD')   // '$ 14.50'
  * formatPrice(100, 'EUR')   // '€ 13.30'
  */
-export function formatPrice(amount, currency = 'BOB') {
+export function formatPrice(amount, currency = 'BOB', { width = 0 } = {}) {
   const { symbol } = getCurrency(currency);
-  return `${symbol} ${convert(amount, currency).toFixed(2)}`;
+  return `${symbol} ${convert(amount, currency).toFixed(2)}`.padStart(width);
 }
