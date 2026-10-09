@@ -1,5 +1,6 @@
 import { round2 } from './money.js';
 import { applyDiscount } from './discounts.js';
+import { addTax } from './tax.js';
 
 /**
  * Calcula el total de un carrito de compras.
@@ -26,7 +27,9 @@ import { applyDiscount } from './discounts.js';
  * @example
  * calculateTotal([{ price: 100, quantity: 1 }], { discountCode: 'SAVE10' }) // 90
  */
-export function calculateTotal(items, { discountCode } = {}) {
+export function calculateTotal(items, { discountCode, includeTax = false } = {}) {
   const subtotal = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
-  return round2(applyDiscount(subtotal, discountCode));
+  const discounted = applyDiscount(subtotal, discountCode);
+  const total = includeTax ? addTax(discounted) : discounted;
+  return round2(total);
 }
