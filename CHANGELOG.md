@@ -13,6 +13,14 @@ y el proyecto usa [Versionado Semántico](https://semver.org/lang/es/).
 
 ### Fixed
 
+## [1.1.0] - 2026-10-09
+
+### Added
+- Códigos de descuento SAVE10, SAVE20 y BLACKFRIDAY aplicables al total del carrito.
+- Cálculo y adición de impuesto IVA del 13% (`TAX_RATE`, `calculateTax`, `addTax`, opción `includeTax`).
+- Soporte de monedas BOB, USD y EUR (`convert`, `getCurrency`) y `formatPrice(amount, currency)`.
+- Recibo imprimible (`buildReceipt`) y comando `receipt` en la CLI.
+
 ## [1.0.0] - 2026-10-01
 
 ### Added
