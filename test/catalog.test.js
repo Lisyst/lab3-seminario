@@ -17,6 +17,13 @@ test('searchProducts encuentra productos por parte del nombre', () => {
   );
 });
 
+test('searchProducts busca sin distinguir mayúsculas de minúsculas', () => {
+  assert.deepEqual(
+    searchProducts('laptop').map((p) => p.sku),
+    ['LAP-001'],
+  );
+});
+
 test('el catálogo tiene productos', () => {
   assert.ok(products.length > 0);
 });
