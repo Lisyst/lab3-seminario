@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { products, searchProducts, formatPrice } from './index.js';
+import { products, searchProducts, formatPrice, findProductBySku, buildReceipt } from './index.js';
 
 const commands = {
   list() {
@@ -20,6 +20,17 @@ const commands = {
   },
 
   // Los comandos nuevos se registran debajo de esta línea
+    receipt(...specs) {
+    const items = specs.map((spec) => {
+      const [sku, qty] = spec.split(':');
+      const product = findProductBySku(sku);
+      if (!product) {
+        throw new Error(`SKU desconocido: ${sku}`);
+      }
+      return { name: product.name, price: product.price, quantity: Number(qty) || 1 };
+    });
+    console.log(buildReceipt(items));
+  },
 };
 
 const [, , name, ...args] = process.argv;
